@@ -1,0 +1,27 @@
+# vim: ft=nginx
+
+server {
+  listen [::]:80;
+  listen 80;
+  server_name <%= @server_name %>;
+
+  root /home/chkbuild/public_html;
+  access_log /var/log/nginx/chkbuild.access.log;
+  error_log /var/log/nginx/chkbuild.error.log;
+
+  gzip_static on;
+  gzip_proxied        expired no-cache no-store private auth;
+  gzip_disable        "MSIE [1-6]\.";
+  gzip_vary           on;
+
+  autoindex on;
+
+  location ~ \.html\.gz$ {
+    add_header Content-Encoding gzip;
+    types { text/html gz; }
+  }
+
+  location ~ \.gz$ {
+    add_header Content-Encoding gzip;
+  }
+}

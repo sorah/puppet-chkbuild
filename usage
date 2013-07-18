@@ -1,0 +1,2 @@
+  class {'chkbuild': top_uri => 'http://rbci.lakewood.privs.net/'}
+  class {'chkbuild::nginx': server_name => 'rbci.lakewood.privs.net'}
